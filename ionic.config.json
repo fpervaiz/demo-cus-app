@@ -1,0 +1,7 @@
+{
+  "name": "unionApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

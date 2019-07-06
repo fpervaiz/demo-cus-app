@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <!--<ion-title>
+      The Cambridge Union
+    </ion-title>-->
+    <ion-img src="/assets/logo_cus.png"></ion-img>
+    <ion-item routerLink="/settings" lines="none" slot="end">
+        <ion-icon color="medium" name="settings"></ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="nextResult | async as item" class="welcome-card" [routerLink]="['/', 'tabs', 'tab2', 'event-details', item.event_id]"> 
+    <ion-item lines="none">
+        <ion-label>
+          <h1>Next Event</h1>
+        </ion-label>
+      </ion-item>    
+      <ion-img src="/assets/testcard.jpg"></ion-img>
+      <ion-card-header>
+        <ion-card-subtitle>{{ item.event_date }} | {{ item.event_start }}</ion-card-subtitle>
+        <ion-card-title>{{ item.event_name }}</ion-card-title>
+        <h6>Former Prime Minister of New Zealand</h6>
+      </ion-card-header>
+      <!--<ion-card-content>
+        <p>Sir Bill English served as Prime Minister of New Zealand until October 2017. He had earlier served as Minister of Finance from 2008 until 2016, guiding the New Zealand economy through the global financial crisis to be one of the faster growing developed economies with sustainable government surpluses.</p>
+      </ion-card-content>-->
+    </ion-card>
+   
+</ion-content>

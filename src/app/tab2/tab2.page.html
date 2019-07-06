@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Term Card
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+      <ion-segment [(ngModel)]="time" (ionChange)="termcardViewChanged($event)" value="upcoming">
+          <ion-segment-button value="upcoming">
+            <ion-label>Upcoming</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="finished">
+              <ion-label>Past</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Event type</ion-label>
+    <ion-select [(ngModel)]="type" (ionChange)="termcardViewChanged($event)">
+      <ion-select-option selected value="all">All</ion-select-option>
+      <ion-select-option value="debate">Debates</ion-select-option>
+      <ion-select-option value="speaker">Speakers</ion-select-option>
+      <ion-select-option value="panel">Panels</ion-select-option>
+      <ion-select-option value="other">Other</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-list> 
+    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'tabs', 'tab2', 'event-details', item.event_id]">
+      <!--<ion-avatar slot="start">
+        <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">"
+      </ion-avatar> -->
+      <ion-label text-wrap>
+        <h3>{{ item.event_name }}</h3>
+        {{ item.event_date }} | {{ item.event_start }}-{{ item.event_end }}
+      </ion-label> 
+    </ion-item> 
+  </ion-list>
+</ion-content>
+
+  
