@@ -33,8 +33,9 @@
         <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">"
       </ion-avatar> -->
       <ion-label text-wrap>
-        <h3>{{ item.event_name }}</h3>
-        {{ item.event_date }} | {{ item.event_start }}-{{ item.event_end }}
+        <h2 *ngIf="item.event_type != 'debate'">{{ item.event_name }}</h2>
+        <h2 *ngIf="item.event_type == 'debate'">{{ item.event_subtitle }} {{ item.event_name }}</h2>
+        {{ item.event_date }} | {{ item.event_start }}
       </ion-label> 
     </ion-item> 
   </ion-list>

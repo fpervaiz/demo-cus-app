@@ -14,14 +14,25 @@
     <ion-card *ngIf="nextResult | async as item" class="welcome-card" [routerLink]="['/', 'tabs', 'tab2', 'event-details', item.event_id]"> 
     <ion-item lines="none">
         <ion-label>
-          <h1>Next Event</h1>
+          <h1 *ngIf="item.event_status == 'upcoming'">Next Event</h1>
+          <h1 *ngIf="item.event_status == 'live'">Live Now</h1>
         </ion-label>
+        <ion-icon name="arrow-forward" slot="end"></ion-icon>
       </ion-item>    
-      <ion-img src="/assets/testcard.jpg"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>{{ item.event_date }} | {{ item.event_start }}</ion-card-subtitle>
-        <ion-card-title>{{ item.event_name }}</ion-card-title>
-        <h6>Former Prime Minister of New Zealand</h6>
+      <ion-card-header no-padding>
+        <ion-item lines="none" style="--ion-background-color:#880313">
+          <ion-avatar *ngIf="item.event_type != 'debate'" padding slot="start" style="width:100px;height:100px">
+            <img src="/assets/joy.jpg">
+          </ion-avatar>
+          <ion-label text-wrap color="light">
+            <h4 *ngIf="item.event_type == 'debate'">{{ item.event_subtitle }}</h4>
+            <h1>{{ item.event_name }}</h1>
+            <h4 *ngIf="item.event_type == 'speaker'">{{ item.event_subtitle }}</h4>
+            <h3>{{ item.event_date }} | {{ item.event_start }}</h3>
+            <br *ngIf="item.event_open_to_all == 'true'">
+            <ion-button *ngIf="item.event_open_to_all == 'true'">Open to All - Union+</ion-button>
+          </ion-label>
+        </ion-item>
       </ion-card-header>
       <!--<ion-card-content>
         <p>Sir Bill English served as Prime Minister of New Zealand until October 2017. He had earlier served as Minister of Finance from 2008 until 2016, guiding the New Zealand economy through the global financial crisis to be one of the faster growing developed economies with sustainable government surpluses.</p>

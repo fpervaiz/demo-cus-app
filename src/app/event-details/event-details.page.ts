@@ -31,4 +31,12 @@ export class EventDetailsPage implements OnInit {
   openWebsite() {
     window.open('https://facebook.com/' + this.information.event_id, '_system');
   }
+
+  openAction() {
+    window.open(this.information.event_action_url, '_system');
+  }
+
+  openLive() {
+    window.open('http://livestre.am/5s6wW');
+  }
 }
