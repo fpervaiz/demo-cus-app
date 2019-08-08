@@ -1,6 +1,7 @@
 import { EventService, SearchType } from './../services/events.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LoadingController } from '@ionic/angular';
 
 // import { Component } from '@angular/core';
 
@@ -20,12 +21,20 @@ export class Tab2Page implements OnInit {
    * @param eventService The event Service to get data
    */
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, public loadingController: LoadingController) { }
 
   ngOnInit() {this.termcardViewChanged()}
  
-  termcardViewChanged() {
-    // Call our service function which returns an Observable
+  async termcardViewChanged() {
+    // Show loading spinner
+    const loading = await this.loadingController.create({
+      message: 'Please Wait',
+      translucent: true,
+    });
+    await loading.present();
+
+    // Call event service function which returns an Observable
     this.results = this.eventService.searchData(this.time, this.type);
+    loading.dismiss();
   }
 }

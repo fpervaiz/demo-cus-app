@@ -1,6 +1,7 @@
 import { EventService } from './../services/events.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-event-details',
@@ -14,20 +15,32 @@ export class EventDetailsPage implements OnInit {
   /**
    * Constructor of our details page
    * @param activatedRoute Information about the route we are on
-   * @param movieService The movie Service to get data
+   * @param eventService The event Service to get data
    */
-  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService) { }
+  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService, public loadingController: LoadingController) { }
  
   ngOnInit() {
+    this.getDetails();
+  }
+
+  async getDetails() {
+    // Show loading spinner
+    const loading = await this.loadingController.create({
+      message: 'Please Wait',
+      translucent: true,
+    });
+    await loading.present();
+
     // Get the ID that was passed with the URL
     let id = this.activatedRoute.snapshot.paramMap.get('id');
  
-    // Get the information from the API
+    // Get the information from the API and hide loading spinner
     this.eventService.getDetails(id).subscribe(result => {
       this.information = result;
-    });
+      loading.dismiss();
+    }, error => { loading.dismiss(); });
   }
- 
+
   openWebsite() {
     window.open('https://facebook.com/' + this.information.event_id, '_system');
   }
