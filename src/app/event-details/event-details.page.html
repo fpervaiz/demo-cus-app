@@ -38,8 +38,8 @@
       Watch livestream
   </ion-button>
   
-  <ion-item>
-    <ion-icon name="logo-facebook" slot="start" lines="none"></ion-icon>
+  <ion-item lines="none">
+    <ion-icon name="logo-facebook" slot="start"></ion-icon>
     <ion-label text-wrap *ngIf="information.event_status == 'upcoming'">Going: {{ information.event_going }}</ion-label>
     <ion-label text-wrap *ngIf="information.event_status == 'live'">Going: {{ information.event_going }}</ion-label>
     <ion-label text-wrap *ngIf="information.event_status == 'finished'">Went: {{ information.event_going }}</ion-label>
@@ -47,7 +47,7 @@
   </ion-item>
     
 
-  <ion-item *ngIf="information.event_type != 'debate'" style="white-space:pre-wrap;">
+  <ion-item lines="none" *ngIf="information.event_type != 'debate'" style="white-space:pre-wrap;">
     <p>{{ information.event_description }}</p>
   </ion-item>
 
