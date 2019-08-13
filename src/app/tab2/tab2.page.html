@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Term Card
+    <ion-title *ngIf="termResult | async as result">
+      Term Card: {{ result.term }}
     </ion-title>
   </ion-toolbar>
   <ion-toolbar>

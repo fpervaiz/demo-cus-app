@@ -13,6 +13,7 @@ import { LoadingController } from '@ionic/angular';
 export class Tab2Page implements OnInit {
   
   results: Observable<any>;
+  termResult: Observable<any>;
   time: string = 'upcoming';
   type: SearchType = SearchType.all;
  
@@ -23,7 +24,10 @@ export class Tab2Page implements OnInit {
 
   constructor(private eventService: EventService, public loadingController: LoadingController) { }
 
-  ngOnInit() {this.termcardViewChanged()}
+  ngOnInit() {
+    this.termResult = this.eventService.getTerm();
+    this.termcardViewChanged()
+  }
  
   async termcardViewChanged() {
     // Show loading spinner

@@ -22,7 +22,6 @@ export class Tab1Page implements OnInit {
 
   ngOnInit() {
     this.nextResult = this.nextEventService.nextEvent();
-    console.log(this.nextResult)
   }
 
 }

@@ -17,7 +17,7 @@ export enum SearchType {
 })
 
 export class EventService {
-  url = 'http://192.168.0.21:5000/api/events';
+  url = 'http://localhost:5000/api/events';
   apiKey = ''; // <-- Enter your own key here!
  
   /**
@@ -57,5 +57,14 @@ export class EventService {
   */
   nextEvent() {
     return this.http.get(`${this.url}/next`).pipe(map(results => results));
-  } 
+  }
+
+  /**
+  * Get detailed information for next event
+  * 
+  * @returns Observable with detailed information
+  */
+  getTerm() {
+    return this.http.get(`${this.url}/term`).pipe(map(results => results));
+  }
 }
