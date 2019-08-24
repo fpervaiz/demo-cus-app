@@ -85,10 +85,14 @@ export class EventDetailsPage implements OnInit {
   addItem() {
     this.newItem.modified = Date.now();
     this.newItem.id = this.information.event_id;
+    this.newItem.event_name = this.information.event_name;
+    this.newItem.event_date = this.information.event_date;
+    this.newItem.event_start = this.information.event_start;
+    this.newItem.event_type = this.information.event_type
  
     this.storageService.addItem(this.newItem).then(item => {
       this.newItem = <Item>{};
-      this.showToast('Event saved! Find it in the saved tab.')
+      this.showToast('Event saved! Find it in the Starred tab.')
       this.loadItems();
     });
   }
@@ -107,14 +111,13 @@ export class EventDetailsPage implements OnInit {
   
 // UPDATE
   updateItem(item: Item) {
-    item.name = this.information.event_name;
     item.modified = Date.now();
-    item.date = this.information.event_date;
-    item.start_time = this.information.event_start_time;
+    item.event_name = this.information.event_name;
+    item.event_date = this.information.event_date;
+    item.event_start = this.information.event_start;
+    item.event_type = this.information.event_type
 
-    this.storageService.updateItem(item).then(item => {
-      console.log('Item updated!');
-    });
+    this.storageService.updateItem(item).then(item => {});
 }
 
   // DELETE
