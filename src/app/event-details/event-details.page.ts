@@ -73,12 +73,10 @@ export class EventDetailsPage implements OnInit {
 
   toggleItem() {
     if (this.is_starred) {
-      console.log("DELETE")
       this.deleteItem(this.thisItem);
     }
     else {
       this.addItem();
-      console.log("ADD")
     }
   }
 
@@ -99,8 +97,6 @@ export class EventDetailsPage implements OnInit {
     this.storageService.getItems().then(items => {
       this.items = items;
       this.thisItem = this.checkStarred();
-      console.log("items:")
-      console.log(this.items)
     });
   }
   
