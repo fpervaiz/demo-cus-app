@@ -3,8 +3,9 @@ import { Storage } from '@ionic/storage';
  
 export interface Item {
   id: number,
-  title: string,
-  value: string,
+  name: string,
+  date: string,
+  start_time: string,
   modified: number
 }
  

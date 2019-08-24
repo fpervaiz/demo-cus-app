@@ -39,7 +39,7 @@ export class EventDetailsPage implements OnInit {
     this.eventService.getDetails(id).subscribe(result => {
       this.information = result;
       // Update saved state
-      this.loadItems();
+      this.loadItems(true);
       loading.dismiss();
     }, error => { loading.dismiss(); });
   }
@@ -94,13 +94,29 @@ export class EventDetailsPage implements OnInit {
   }
 
   // READ
-  loadItems() {
+  loadItems(update=false) {
     this.storageService.getItems().then(items => {
       this.items = items;
       this.thisItem = this.checkStarred();
+      if (update) {
+        // Keep saved item up to date
+        this.updateItem(this.thisItem);
+      };
     });
   }
   
+// UPDATE
+  updateItem(item: Item) {
+    item.name = this.information.event_name;
+    item.modified = Date.now();
+    item.date = this.information.event_date;
+    item.start_time = this.information.event_start_time;
+
+    this.storageService.updateItem(item).then(item => {
+      console.log('Item updated!');
+    });
+}
+
   // DELETE
   deleteItem(item: Item) {
     this.storageService.deleteItem(item.id).then(item => {
