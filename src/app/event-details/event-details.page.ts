@@ -1,7 +1,8 @@
 import { EventService } from './../services/events.service';
+import { StorageService, Item } from '../services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-event-details',
@@ -17,10 +18,11 @@ export class EventDetailsPage implements OnInit {
    * @param activatedRoute Information about the route we are on
    * @param eventService The event Service to get data
    */
-  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService, public loadingController: LoadingController) { }
+  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService, public loadingController: LoadingController, private toastController: ToastController, private storageService: StorageService) { }
  
   ngOnInit() {
     this.getDetails();
+    this.loadItems();
   }
 
   async getDetails() {
@@ -52,4 +54,72 @@ export class EventDetailsPage implements OnInit {
   openLive() {
     window.open('http://livestre.am/5s6wW');
   }
+
+  // Starring feature functions
+
+  items: Item[] = []; 
+  newItem: Item = <Item>{};
+  thisItem: Item = <Item>{};
+  is_starred: boolean;
+
+  // Toast function
+  async showToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  toggleItem() {
+    if (this.is_starred) {
+      console.log("DELETE")
+      this.deleteItem(this.thisItem);
+    }
+    else {
+      this.addItem();
+      console.log("ADD")
+    }
+  }
+
+  // CREATE
+  addItem() {
+    this.newItem.modified = Date.now();
+    this.newItem.id = this.information.event_id;
+ 
+    this.storageService.addItem(this.newItem).then(item => {
+      this.newItem = <Item>{};
+      this.showToast('Event saved! Find it in the saved tab.')
+      this.loadItems();
+    });
+  }
+
+  // READ
+  loadItems() {
+    this.storageService.getItems().then(items => {
+      this.items = items;
+      this.thisItem = this.checkStarred();
+      console.log("items:")
+      console.log(this.items)
+    });
+  }
+  
+  // DELETE
+  deleteItem(item: Item) {
+    this.storageService.deleteItem(item.id).then(item => {
+      this.showToast('Event unsaved.');
+      this.loadItems();
+    });
+  }
+  
+  // READ: check if this event is already starred
+  checkStarred() {
+    for (var i=0; i < this.items.length; i++) {
+      if (this.items[i].id === this.information.event_id) {
+        this.is_starred = true;
+        return this.items[i];
+      }
+    }
+    this.is_starred = false;
+  };
 }

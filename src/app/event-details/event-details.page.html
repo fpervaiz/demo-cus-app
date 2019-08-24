@@ -4,8 +4,8 @@
       <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
     </ion-buttons>
     <ion-title>Term Card</ion-title>
-    <ion-button fill="clear" slot="end">
-      <ion-icon color="medium" name="star"></ion-icon>
+    <ion-button fill="clear" slot="end" (click)="toggleItem()">
+      <ion-icon [color]="is_starred ? 'energized' : 'medium'" name="star"></ion-icon>
   </ion-button>
   </ion-toolbar>
   <ion-list-header no-padding>
