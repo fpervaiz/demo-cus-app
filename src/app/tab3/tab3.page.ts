@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { StorageService, Item } from '../services/storage.service';
-import { LoadingController, ToastController, IonList } from '@ionic/angular';
+import { LoadingController, ToastController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -9,7 +9,7 @@ import { LoadingController, ToastController, IonList } from '@ionic/angular';
 })
 export class Tab3Page implements OnInit {
 
-  constructor(private storageService: StorageService, private toastController: ToastController) {}
+  constructor(private storageService: StorageService, private toastController: ToastController, private navController: NavController) {}
 
   ngOnInit() {
     this.loadItems();
@@ -44,7 +44,7 @@ export class Tab3Page implements OnInit {
     });
   }
 
-  // Helper
+  // Show toast function
   async showToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
@@ -53,4 +53,8 @@ export class Tab3Page implements OnInit {
     toast.present();
   }
 
+  // Update saved status every time page viewed
+  ionViewDidEnter() {
+    this.loadItems();
+  }
 }

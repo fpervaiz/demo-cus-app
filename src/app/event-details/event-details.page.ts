@@ -2,7 +2,7 @@ import { EventService } from './../services/events.service';
 import { StorageService, Item } from '../services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-event-details',
@@ -18,11 +18,10 @@ export class EventDetailsPage implements OnInit {
    * @param activatedRoute Information about the route we are on
    * @param eventService The event Service to get data
    */
-  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService, public loadingController: LoadingController, private toastController: ToastController, private storageService: StorageService) { }
+  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService, public loadingController: LoadingController, private toastController: ToastController, private storageService: StorageService, private navController: NavController) { }
  
   ngOnInit() {
     this.getDetails();
-    this.loadItems();
   }
 
   async getDetails() {
@@ -39,6 +38,8 @@ export class EventDetailsPage implements OnInit {
     // Get the information from the API and hide loading spinner
     this.eventService.getDetails(id).subscribe(result => {
       this.information = result;
+      // Update saved state
+      this.loadItems();
       loading.dismiss();
     }, error => { loading.dismiss(); });
   }
@@ -118,4 +119,9 @@ export class EventDetailsPage implements OnInit {
     }
     this.is_starred = false;
   };
+
+  // Update saved status every time page viewed
+  ionViewDidEnter() {
+    this.loadItems();
+  }
 }
