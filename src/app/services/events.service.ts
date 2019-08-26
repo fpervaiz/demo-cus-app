@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// Typescript custom enum for search types (optional)
+// Typescript custom enum for search types
 export enum SearchType {
   all = 'all',
   debate = 'debate',

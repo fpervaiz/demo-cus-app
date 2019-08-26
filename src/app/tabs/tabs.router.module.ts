@@ -35,6 +35,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab3/tab3.module#Tab3PageModule'
+          },
+          {
+            path: 'event-details/:id',
+            loadChildren: '../event-details/event-details.module#EventDetailsPageModule'
           }
         ]
       },
@@ -44,6 +48,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../tab4/tab4.module#Tab4PageModule'
+          },
+          {
+            path: 'discounts',
+            loadChildren: '../tab4/discounts/discounts.module#DiscountsPageModule'
           }
         ]
       },
