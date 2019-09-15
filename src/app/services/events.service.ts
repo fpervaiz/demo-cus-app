@@ -17,7 +17,7 @@ export enum SearchType {
 })
 
 export class EventService {
-  url = 'http://192.168.0.83:5000/api/events';
+  url = 'http://localhost:5000/api/events';
   apiKey = ''; // <-- Enter your own key here!
  
   /**
