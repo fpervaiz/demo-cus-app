@@ -4,6 +4,7 @@
       Term Card
     </ion-title>
   </ion-toolbar>
+
   <ion-toolbar>
     <ion-segment [(ngModel)]="time" (ionChange)="termcardViewChanged($event)" value="upcoming">
       <ion-segment-button value="upcoming">
@@ -14,44 +15,83 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
+
+  <ion-item *ngIf="termResult | async as result" lines="none" style="--ion-background-color:#880313">
+    <ion-label text-wrap color="light">
+      <h2 *ngIf="result.is_term">{{ result.curr }}</h2>
+      <h2 *ngIf="!result.is_term && this.time == 'upcoming'">{{ result.next }}</h2>
+      <h2 *ngIf="!result.is_term && this.time == 'finished'">{{ result.prev }}</h2>
+    </ion-label>
+    
+    
+        <ion-select style="color: white" [(ngModel)]="type" (ionChange)="termcardViewChanged($event)">
+          <ion-select-option selected value="all">All</ion-select-option>
+          <ion-select-option value="debate">Debates</ion-select-option>
+          <ion-select-option value="speaker">Speakers</ion-select-option>
+          <ion-select-option value="panel">Panels</ion-select-option>
+          <ion-select-option value="other">Other</ion-select-option>
+        </ion-select>
+      
+  </ion-item>
+
 </ion-header>
 
 <ion-content>
 
-  <ion-item>
-    <ion-label>Event type</ion-label>
-    <ion-select [(ngModel)]="type" (ionChange)="termcardViewChanged($event)">
-      <ion-select-option selected value="all">All</ion-select-option>
-      <ion-select-option value="debate">Debates</ion-select-option>
-      <ion-select-option value="speaker">Speakers</ion-select-option>
-      <ion-select-option value="panel">Panels</ion-select-option>
-      <ion-select-option value="other">Other</ion-select-option>
-    </ion-select>
-  </ion-item>
+  
 
-  <ion-item *ngIf="termResult | async as result" lines="none" style="--ion-background-color:#880313">
-    <ion-label text-wrap color="light">
-      <h2 *ngIf="result.is_term">{{ result.curr.toUpperCase() }}</h2>
-      <h2 *ngIf="!result.is_term && this.time == 'upcoming'">{{ result.next.toUpperCase() }}</h2>
-      <h2 *ngIf="!result.is_term && this.time == 'finished'">{{ result.prev.toUpperCase() }}</h2>
-    </ion-label>
-  </ion-item>
 
+
+  <!--
   <ion-list>
     <ion-item button *ngFor="let item of (results | async)"
       [routerLink]="['/', 'tabs', 'tab2', 'event-details', item.event_id]">
-      <!--<ion-avatar slot="start">
+      <ion-avatar slot="start">
         <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">"
-      </ion-avatar> -->
+      </ion-avatar>
       <ion-label text-wrap>
         <ion-text>
           <h2 *ngIf="item.event_type != 'debate'">{{ item.event_name }}</h2>
           <h2 *ngIf="item.event_type == 'debate'">{{ item.event_subtitle }} {{ item.event_name }}</h2>
         </ion-text>
+        <ion-row style="height: 10px"></ion-row>
         <ion-text>
-          <h3>{{ item.event_date }} | {{ item.event_start }}</h3>
+          <p>{{ item.event_date }} | {{ item.event_start }}</p>
         </ion-text>
       </ion-label>
     </ion-item>
   </ion-list>
+-->
+
+  <ion-list>
+    <ion-card padding button *ngFor="let item of (results | async)"
+      [routerLink]="['/', 'tabs', 'tab2', 'event-details', item.event_id]">
+
+      <ion-row>
+        <ion-col size="3">
+          <ion-avatar style="width:50px;height:50px">
+            <img src="/assets/joy.jpg">
+          </ion-avatar>
+        </ion-col>
+
+        <ion-col>
+          <ion-card-title mode="md" *ngIf="item.event_type != 'debate'">{{ item.event_name }}</ion-card-title>
+          <ion-card-title mode="md" *ngIf="item.event_type == 'debate'">{{ item.event_subtitle }} {{ item.event_name }}
+          </ion-card-title>
+
+          <ion-row style="height: 5px"></ion-row>
+
+          <ion-label *ngIf="item.event_type != 'debate' && item.event_subtitle">
+          <ion-card-subtitle>{{ item.event_subtitle }}<br><br>{{ item.event_date }} | {{ item.event_start }}</ion-card-subtitle></ion-label>
+
+          <ion-label *ngIf="item.event_type == 'debate' || !(item.event_subtitle)">
+          <ion-card-subtitle>{{ item.event_date }} | {{ item.event_start }}</ion-card-subtitle></ion-label>
+
+        </ion-col>
+        
+      </ion-row>
+
+    </ion-card>
+  </ion-list>
+
 </ion-content>

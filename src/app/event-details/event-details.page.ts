@@ -67,7 +67,8 @@ export class EventDetailsPage implements OnInit {
   async showToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 2000
+      duration: 2000,
+      showCloseButton: true
     });
     toast.present();
   }
