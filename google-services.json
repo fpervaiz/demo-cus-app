@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "948486446960",
+    "firebase_url": "https://cambridge-union-app.firebaseio.com",
+    "project_id": "cambridge-union-app",
+    "storage_bucket": "cambridge-union-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948486446960:android:6c09e61e6136eba43c39b5",
+        "android_client_info": {
+          "package_name": "org.cus.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948486446960-qc1ge0save4krm3513vfjjvah0mfe210.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6Du5HwYa3USDtMVOIYcT-ZhFsCHIV8wM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948486446960-qc1ge0save4krm3513vfjjvah0mfe210.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "948486446960-a4i439nvgi8sq3uu4h14dru6df19h95a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.cus.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

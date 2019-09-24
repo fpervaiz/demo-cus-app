@@ -12,6 +12,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
