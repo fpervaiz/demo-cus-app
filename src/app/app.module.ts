@@ -16,13 +16,31 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
+const firebaseConfig = {
+  apiKey: "AIzaSyA1gNyGk-wTGgXaLCyqhYNXEMvjhW7ZIJw",
+  authDomain: "cambridge-union-app.firebaseapp.com",
+  databaseURL: "https://cambridge-union-app.firebaseio.com",
+  projectId: "cambridge-union-app",
+  storageBucket: "cambridge-union-app.appspot.com",
+  messagingSenderId: "948486446960",
+};
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
+    FirebaseX,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
