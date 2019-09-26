@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-title>
@@ -8,25 +7,65 @@
 </ion-header>
 
 <ion-content>
-    <ion-list lines="none">
-        <ion-list-header>
-          <ion-label>Resources</ion-label>
-        </ion-list-header>
-        <ion-item href="">
-          <ion-icon slot="start" color="medium" name="paper"></ion-icon>
-          <ion-label>News</ion-label>
-        </ion-item>
-        <ion-item href="">
-          <ion-icon slot="start" color="medium" name="contacts"></ion-icon>
-          <ion-label>Committee</ion-label>
-        </ion-item>
-        <ion-item [routerLink]="['/', 'tabs', 'tab4', 'discounts']" routerDirection="forward">
-          <ion-icon slot="start" color="medium" name="pricetags"></ion-icon>
-          <ion-label>Discounts</ion-label>
-        </ion-item>
-        <ion-item href="">
-          <ion-icon slot="start" color="medium" name="person-add"></ion-icon>
-          <ion-label>Get Involved</ion-label>
-        </ion-item>
-      </ion-list>
+
+  <ion-list>
+
+    <ion-card href="https://cus.org/members/running-your-union/whos-who">
+      <!--<img src="./assets/testcard.jpg" />-->
+      <ion-item lines="none">
+        <ion-icon name="people" slot="start"></ion-icon>
+        <ion-card-header>
+          <ion-card-title>Committee</ion-card-title>
+          <ion-card-subtitle>Coming soon!</ion-card-subtitle>
+        </ion-card-header>
+      </ion-item>
+      <ion-card-content>
+        Details on the committee positions within the Union and current position holders.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card [routerLink]="['/', 'tabs', 'tab4', 'discounts']" routerDirection="forward">
+      <!--<img src="./assets/testcard.jpg" />-->
+      <ion-item lines="none">
+        <ion-icon name="pricetags" slot="start"></ion-icon>
+        <ion-card-header>
+          <ion-card-title>Discounts</ion-card-title>
+          <!--<ion-card-subtitle>Coming soon!</ion-card-subtitle>-->
+        </ion-card-header>
+      </ion-item>
+      <ion-card-content>
+        Find out what discounts you are entitled to as a member of the Union.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card [routerLink]="['/', 'tabs', 'tab4', 'discounts']" routerDirection="forward">
+      <!--<img src="./assets/testcard.jpg" />-->
+      <ion-item lines="none">
+        <ion-icon name="person-add" slot="start"></ion-icon>
+        <ion-card-header>
+          <ion-card-title>Get Involved</ion-card-title>
+          <ion-card-subtitle>Coming soon!</ion-card-subtitle>
+        </ion-card-header>
+      </ion-item>
+      <ion-card-content>
+        Find out how to audition to speak or interview at the Union, or apply for a committee position.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card [routerLink]="['/', 'tabs', 'tab4', 'discounts']" routerDirection="forward">
+      <!--<img src="./assets/testcard.jpg" />-->
+      <ion-item lines="none">
+        <ion-icon name="paper" slot="start"></ion-icon>
+        <ion-card-header>
+          <ion-card-title>News</ion-card-title>
+          <ion-card-subtitle>Coming soon!</ion-card-subtitle>
+        </ion-card-header>
+      </ion-item>
+      <ion-card-content>
+        Get the latest updates on events on the Union, the refurbishment of the Union buildings and more.
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
 </ion-content>
