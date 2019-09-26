@@ -52,6 +52,10 @@ const routes: Routes = [
           {
             path: 'discounts',
             loadChildren: '../tab4/discounts/discounts.module#DiscountsPageModule'
+          },
+          {
+            path: 'committee',
+            loadChildren: '../tab4/committee/committee.module#CommitteePageModule'
           }
         ]
       },
