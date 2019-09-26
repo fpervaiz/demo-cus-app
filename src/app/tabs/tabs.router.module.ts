@@ -56,6 +56,10 @@ const routes: Routes = [
           {
             path: 'committee',
             loadChildren: '../tab4/committee/committee.module#CommitteePageModule'
+          },
+          {
+            path: 'get-involved',
+            loadChildren: '../tab4/get-involved/get-involved.module#GetInvolvedPageModule'
           }
         ]
       },
