@@ -22,23 +22,22 @@
       <h2 *ngIf="!result.is_term && this.time == 'upcoming'">{{ result.next }}</h2>
       <h2 *ngIf="!result.is_term && this.time == 'finished'">{{ result.prev }}</h2>
     </ion-label>
-    
-    
-        <ion-select style="color: white" [(ngModel)]="type" (ionChange)="termcardViewChanged($event)">
-          <ion-select-option selected value="all">All</ion-select-option>
-          <ion-select-option value="debate">Debates</ion-select-option>
-          <ion-select-option value="speaker">Speakers</ion-select-option>
-          <ion-select-option value="panel">Panels</ion-select-option>
-          <ion-select-option value="other">Other</ion-select-option>
-        </ion-select>
-      
+
+    <ion-select style="color: white" [(ngModel)]="type" (ionChange)="termcardViewChanged($event)">
+      <ion-select-option selected value="all">All</ion-select-option>
+      <ion-select-option value="debate">Debates</ion-select-option>
+      <ion-select-option value="speaker">Speakers</ion-select-option>
+      <ion-select-option value="panel">Panels</ion-select-option>
+      <ion-select-option value="other">Other</ion-select-option>
+    </ion-select>
+
   </ion-item>
 
 </ion-header>
 
 <ion-content>
 
-  
+
 
 
 
@@ -82,13 +81,16 @@
           <ion-row style="height: 5px"></ion-row>
 
           <ion-label *ngIf="item.event_type != 'debate' && item.event_subtitle">
-          <ion-card-subtitle>{{ item.event_subtitle }}<br><br>{{ item.event_date }} | {{ item.event_start }}</ion-card-subtitle></ion-label>
+            <ion-card-subtitle>{{ item.event_subtitle }}<br><br>{{ item.event_date }} | {{ item.event_start }}
+            </ion-card-subtitle>
+          </ion-label>
 
           <ion-label *ngIf="item.event_type == 'debate' || !(item.event_subtitle)">
-          <ion-card-subtitle>{{ item.event_date }} | {{ item.event_start }}</ion-card-subtitle></ion-label>
+            <ion-card-subtitle>{{ item.event_date }} | {{ item.event_start }}</ion-card-subtitle>
+          </ion-label>
 
         </ion-col>
-        
+
       </ion-row>
 
     </ion-card>
