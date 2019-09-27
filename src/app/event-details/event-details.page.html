@@ -8,8 +8,9 @@
       <ion-icon [color]="is_starred ? 'energized' : 'medium'" name="star"></ion-icon>
     </ion-button>
   </ion-toolbar>
+
   <ion-list-header no-padding>
-    <ion-item lines="none" style="--ion-background-color:#880313">
+    <ion-item lines="none" style="--ion-background-color:#880313; width: 100%">
       <ion-avatar *ngIf="information.event_type != 'debate'" padding slot="start" style="width:100px;height:100px">
         <img src="/assets/joy.jpg">
       </ion-avatar>
@@ -47,7 +48,8 @@
   </ion-item>
 
 
-  <ion-item lines="none" *ngIf="information.event_type != 'debate'" style="white-space:pre-wrap;">
+  <!--<ion-item lines="none" *ngIf="information.event_type != 'debate'" style="white-space:pre-wrap;">-->
+  <ion-item lines="none" style="white-space:pre-wrap;">  
     <p>{{ information.event_description }}</p>
   </ion-item>
 
@@ -58,7 +60,7 @@
     <ng-container *ngFor="let speaker of information.event_speakers">
       <ion-item *ngIf="speaker.speaker_type == 'prop'" lines="none">
         <ion-avatar padding slot="start" style="width:75px;height:75px">
-          <img src="/assets/joy.jpg">
+          <img src="{{ speaker.speaker_thumb_url }}">
         </ion-avatar>
         <ion-label text-wrap>
           <h2>{{ speaker.speaker_name }}</h2>
@@ -75,7 +77,7 @@
     <ng-container *ngFor="let speaker of information.event_speakers">
       <ion-item *ngIf="speaker.speaker_type == 'opp'" lines="none">
         <ion-avatar padding slot="start" style="width:75px;height:75px">
-          <img src="/assets/joy.jpg">
+          <img src="{{ speaker.speaker_thumb_url }}">
         </ion-avatar>
         <ion-label text-wrap>
           <h2>{{ speaker.speaker_name }}</h2>
