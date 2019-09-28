@@ -48,7 +48,12 @@ export class AppComponent {
       
       //this.statusBar.overlaysWebView(true);
       //this.statusBar.backgroundColorByHexString('#ffffff');
-      this.statusBar.styleLightContent();
+      if (this.platform.is('ios')) {
+        this.statusBar.styleDefault();
+      }
+      else {
+        this.statusBar.styleLightContent();
+      }
       this.splashScreen.hide();
     });
   }
