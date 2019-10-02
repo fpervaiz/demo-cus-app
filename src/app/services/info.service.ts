@@ -6,7 +6,9 @@ import { map } from 'rxjs/operators';
 // Typescript custom enum for info types
 export enum InfoType {
   discounts = 'discounts',
-  committee = 'committee'
+  committee = 'committee',
+  news_all = 'news/all',
+  news_few = 'news/few'
 }
 
 @Injectable({

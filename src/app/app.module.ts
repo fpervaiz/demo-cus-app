@@ -16,6 +16,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
+import { NewsModalPageModule } from './news-modal/news-modal.module'
+
 const firebaseConfig = {
   apiKey: "AIzaSyA1gNyGk-wTGgXaLCyqhYNXEMvjhW7ZIJw",
   authDomain: "cambridge-union-app.firebaseapp.com",
@@ -35,7 +37,8 @@ const firebaseConfig = {
     HttpClientModule,
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    NewsModalPageModule
   ],
   providers: [
     StatusBar,
