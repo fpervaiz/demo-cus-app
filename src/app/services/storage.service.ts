@@ -7,6 +7,7 @@ export interface Item {
   event_date: string,
   event_start: string,
   event_type: string,
+  event_photo_url: string,
   modified: number
 }
  

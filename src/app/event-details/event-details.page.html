@@ -12,7 +12,7 @@
   <ion-list-header no-padding>
     <ion-item lines="none" style="--ion-background-color:#880313; width: 100%">
       <ion-avatar *ngIf="information.event_type != 'debate'" padding slot="start" style="width:100px;height:100px">
-        <img src="/assets/joy.jpg">
+        <img src="{{ information.event_photo_url }}">
       </ion-avatar>
       <ion-label text-wrap color="light">
         <h4 *ngIf="information.event_type == 'debate'">{{ information.event_subtitle }}</h4>

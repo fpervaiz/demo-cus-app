@@ -89,7 +89,8 @@ export class EventDetailsPage implements OnInit {
     this.newItem.event_name = this.information.event_name;
     this.newItem.event_date = this.information.event_date;
     this.newItem.event_start = this.information.event_start;
-    this.newItem.event_type = this.information.event_type
+    this.newItem.event_type = this.information.event_type;
+    this.newItem.event_photo_url = this.information.event_photo_url
  
     this.storageService.addItem(this.newItem).then(item => {
       this.newItem = <Item>{};

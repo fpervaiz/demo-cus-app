@@ -15,7 +15,7 @@ export enum InfoType {
   providedIn: 'root'
 })
 export class InfoService {
-  url = 'http://192.168.0.21:5000/api/info';
+  url = 'http://localhost:5000/api/info';
   apiKey = ''; // <-- Enter your own key here!
  
   /**
