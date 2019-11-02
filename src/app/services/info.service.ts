@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -15,8 +15,13 @@ export enum InfoType {
   providedIn: 'root'
 })
 export class InfoService {
-  url = 'http://localhost:5000/api/info';
-  apiKey = ''; // <-- Enter your own key here!
+  url = 'https://app-cus.ddns.net/api/info';
+  
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Basic ' + btoa("appuser:cusapp1815")
+    })
+  };
  
   /**
    * Constructor of the Service with Dependency Injection
@@ -32,7 +37,7 @@ export class InfoService {
   * @returns Observable with the search results
   */
   getInfo(type: InfoType): Observable<any> {
-    return this.http.get(`${this.url}/${type}`).pipe(
+    return this.http.get(`${this.url}/${type}`, this.httpOptions).pipe(
       map(results => results)
     );
   }

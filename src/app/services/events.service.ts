@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -17,8 +17,13 @@ export enum SearchType {
 })
 
 export class EventService {
-  url = 'http://localhost:5000/api/events';
-  apiKey = ''; // <-- Enter your own key here!
+  url = 'https://app-cus.ddns.net/api/events';
+  
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Basic ' + btoa("appuser:cusapp1815")
+    })
+  };
  
   /**
    * Constructor of the Service with Dependency Injection
@@ -35,7 +40,7 @@ export class EventService {
   * @returns Observable with the search results
   */
   searchData(time: string, type: SearchType): Observable<any> {
-    return this.http.get(`${this.url}/${time}/${type}`).pipe(
+    return this.http.get(`${this.url}/${time}/${type}`, this.httpOptions).pipe(
       map(results => results)
     );
   }
@@ -47,7 +52,7 @@ export class EventService {
   * @returns Observable with detailed information
   */
   getDetails(id) {
-    return this.http.get(`${this.url}/${id}`);
+    return this.http.get(`${this.url}/${id}`, this.httpOptions);
   }
 
   /**
@@ -56,7 +61,7 @@ export class EventService {
   * @returns Observable with detailed information
   */
   nextEvent() {
-    return this.http.get(`${this.url}/next`).pipe(map(results => results));
+    return this.http.get(`${this.url}/next`, this.httpOptions).pipe(map(results => results));
   }
 
   /**
@@ -65,6 +70,6 @@ export class EventService {
   * @returns Observable with detailed information
   */
   getTerm() {
-    return this.http.get(`${this.url}/term`).pipe(map(results => results));
+    return this.http.get(`${this.url}/term`, this.httpOptions).pipe(map(results => results));
   }
 }
