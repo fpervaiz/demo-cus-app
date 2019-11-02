@@ -57,7 +57,7 @@
     <ion-card-header no-padding>
       <ion-item lines="none" style="--ion-background-color:#880313">
         <ion-avatar *ngIf="item.event_type != 'debate'" padding slot="start" style="width:100px;height:100px">
-          <img src="/assets/joy.jpg">
+          <img src="{{ item.event_photo_url }}">
         </ion-avatar>
         <ion-label text-wrap color="light">
           <h4 *ngIf="item.event_type == 'debate'">{{ item.event_subtitle }}</h4>
