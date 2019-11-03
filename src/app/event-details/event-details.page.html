@@ -29,7 +29,7 @@
 
 <ion-content *ngIf="information | async as information">
 
-  <ion-button expand="full" *ngIf="information.event_action_text" (click)="openAction()">
+  <ion-button expand="full" *ngIf="information.event_action_text" (click)="openAction(information.event_action_url)">
     <ion-icon name="open" slot="start"></ion-icon>
     {{ information.event_action_text }}
   </ion-button>
@@ -87,7 +87,7 @@
     </ng-container>
   </ion-list>
 
-  <ion-button expand="full" (click)="openWebsite()">
+  <ion-button expand="full" (click)="openWebsite(information.event_id)">
     <ion-icon name="open" slot="start"></ion-icon>
     View on Facebook
   </ion-button>

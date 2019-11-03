@@ -40,16 +40,15 @@ export class EventDetailsPage implements OnInit {
     // Get the information from the API and hide loading spinner
     this.information = this.eventService.getDetails(id);
     this.information.subscribe(results => this.results = results);
-    console.log(this.results);
     loading.dismiss();
   }
 
-  openWebsite() {
-    window.open('https://facebook.com/' + this.information.event_id, '_system');
+  openWebsite(url: string) {
+    window.open('https://facebook.com/' + url, '_system');
   }
 
-  openAction() {
-    window.open(this.information.event_action_url, '_system');
+  openAction(url: string) {
+    window.open(url, '_system');
   }
 
   openLive() {
@@ -85,12 +84,12 @@ export class EventDetailsPage implements OnInit {
   // CREATE
   addItem() {
     this.newItem.modified = Date.now();
-    this.newItem.id = this.information.event_id;
-    this.newItem.event_name = this.information.event_name;
-    this.newItem.event_date = this.information.event_date;
-    this.newItem.event_start = this.information.event_start;
-    this.newItem.event_type = this.information.event_type;
-    this.newItem.event_photo_url = this.information.event_photo_url
+    this.newItem.id = this.results.event_id;
+    this.newItem.event_name = this.results.event_name;
+    this.newItem.event_date = this.results.event_date;
+    this.newItem.event_start = this.results.event_start;
+    this.newItem.event_type = this.results.event_type;
+    this.newItem.event_photo_url = this.results.event_photo_url
 
     this.storageService.addItem(this.newItem).then(item => {
       this.newItem = <Item>{};
@@ -114,10 +113,10 @@ export class EventDetailsPage implements OnInit {
   // UPDATE
   updateItem(item: Item) {
     item.modified = Date.now();
-    item.event_name = this.information.event_name;
-    item.event_date = this.information.event_date;
-    item.event_start = this.information.event_start;
-    item.event_type = this.information.event_type
+    item.event_name = this.results.event_name;
+    item.event_date = this.results.event_date;
+    item.event_start = this.results.event_start;
+    item.event_type = this.results.event_type
 
     this.storageService.updateItem(item).then(item => { });
   }
@@ -133,7 +132,7 @@ export class EventDetailsPage implements OnInit {
   // READ: check if this event is already starred
   checkStarred() {
     for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].id === this.information.event_id) {
+      if (this.items[i].id === this.results.event_id) {
         this.is_starred = true;
         return this.items[i];
       }
