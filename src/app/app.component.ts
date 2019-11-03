@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,6 +14,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class AppComponent {
   constructor(
+    private router: Router,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
@@ -34,10 +36,13 @@ export class AppComponent {
     this.fcm.getToken();
     this.fcm.onNotifications().subscribe(
       (msg) => {
-        if (this.platform.is('ios')) {
-          this.presentToast(msg.aps.alert);
-        } else {
-          this.presentToast(msg.body);
+        //if (this.platform.is('ios')) {
+          //this.presentToast(msg.aps.alert);
+        //} else {
+          //this.presentToast(msg.body);
+        //}
+        if (msg.tap) {
+          this.router.navigate(['/', 'tabs', 'tab2', 'event-details', msg.event_id]);
         }
       });
   }
