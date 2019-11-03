@@ -9,6 +9,7 @@ import { ModalController, NavParams } from '@ionic/angular'
 export class NewsModalPage implements OnInit {
 
   id: string;
+  date: string;
   title: string;
   content: string;
   thumb: string;
@@ -17,6 +18,7 @@ export class NewsModalPage implements OnInit {
 
   ngOnInit() {
     this.id = this.navParams.data.id;
+    this.date = this.navParams.data.date;
     this.title = this.navParams.data.title;
     this.content = this.navParams.data.content;
     this.thumb = this.navParams.data.thumb;

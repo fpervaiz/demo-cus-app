@@ -36,10 +36,11 @@ export class Tab1Page implements OnInit {
     const modal = await this.modalController.create({
       component: NewsModalPage,
       componentProps: {
+        "id": id,
         "date": date,
         "title": title,
         "content": content,
-        "img_thumb": thumb
+        "thumb": thumb
       }
     });
 

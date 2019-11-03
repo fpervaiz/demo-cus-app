@@ -80,7 +80,7 @@
     </ion-card-header>
 
     <ion-card *ngFor="let newsItem of (news | async)">
-      <ion-item button (click)="openModal(newsItem.news_id, newsItem.news_title, newsItem.news_content, newsItem.news_thumb_img)" lines="none">
+      <ion-item button (click)="openModal(newsItem.news_id, newsItem.news_date, newsItem.news_title, newsItem.news_content, newsItem.news_thumb_img)" lines="none">
         <ion-thumbnail slot="start">
           <img src="{{ newsItem.news_thumb_img }}">
         </ion-thumbnail>

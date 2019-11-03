@@ -5,9 +5,11 @@
 </ion-header>
 
 <ion-content padding>
-  <p>{{ id }}</p>
-  <p>{{ title }}</p>
-  <p>{{ content }}</p>
-  <p>{{ thumb }}</p>
-  <ion-button (click)="closeModal()">Close</ion-button>
+  <img src="{{ thumb }}" />
+  <h1>{{ title }}</h1>
+  <h4>{{ date }}</h4>
+  <br>
+  <div [innerHTML]="content"></div>
+  <br>
+  <ion-button expand="full" (click)="closeModal()">Close</ion-button>
 </ion-content>
