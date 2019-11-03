@@ -43,7 +43,7 @@ export class FcmService {
   }
 
   onNotifications() {
-    return this.firebase.onMessageReceived();
+    return this.firebase.onMessageReceived().subscribe(data => console.log(`FCM message: ${data}`));;
   }
 
   topicSubscribe(topic) {

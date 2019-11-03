@@ -1,4 +1,5 @@
 import { EventService } from './../services/events.service';
+import { FcmService } from './../services/fcm.service';
 import { StorageService, Item } from '../services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -20,8 +21,14 @@ export class EventDetailsPage implements OnInit {
    * @param activatedRoute Information about the route we are on
    * @param eventService The event Service to get data
    */
-  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService, public loadingController: LoadingController, private toastController: ToastController, private storageService: StorageService, private navController: NavController) { }
-
+  constructor(private activatedRoute: ActivatedRoute,
+    private eventService: EventService,
+    public loadingController: LoadingController,
+    private toastController: ToastController,
+    private storageService: StorageService,
+    private navController: NavController,
+    private fcmService: FcmService) { }
+ 
   ngOnInit() {
     this.getDetails();
   }
@@ -75,9 +82,11 @@ export class EventDetailsPage implements OnInit {
   toggleItem() {
     if (this.is_starred) {
       this.deleteItem(this.thisItem);
+      this.fcmService.topicUnsubscribe(this.results.event_id);
     }
     else {
       this.addItem();
+      this.fcmService.topicSubscribe(this.results.event_id);
     }
   }
 
