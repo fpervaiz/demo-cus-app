@@ -11,26 +11,26 @@ export enum SearchType {
   panel = 'panel',
   other = 'other'
 }
- 
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class EventService {
   url = 'https://app-cus.ddns.net/api/events';
-  
+
   httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'Basic ' + btoa("appuser:cusapp1815")
     })
   };
- 
+
   /**
    * Constructor of the Service with Dependency Injection
    * @param http The standard Angular HttpClient to make requests
    */
   constructor(private http: HttpClient) { }
- 
+
   /**
   * Get data from the Union API 
   * map the result to return only the results that we need
@@ -44,15 +44,17 @@ export class EventService {
       map(results => results)
     );
   }
- 
+
   /**
   * Get detailed information for an event ID
   * 
   * @param {string} id event ID to retrieve information
   * @returns Observable with detailed information
   */
-  getDetails(id) {
-    return this.http.get(`${this.url}/${id}`, this.httpOptions);
+  getDetails(id: string): Observable<any> {
+    return this.http.get(`${this.url}/${id}`, this.httpOptions).pipe(
+      map(results => results)
+    );
   }
 
   /**

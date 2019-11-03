@@ -3,6 +3,7 @@ import { StorageService, Item } from '../services/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-event-details',
@@ -10,16 +11,17 @@ import { LoadingController, ToastController, NavController } from '@ionic/angula
   styleUrls: ['./event-details.page.scss'],
 })
 export class EventDetailsPage implements OnInit {
- 
-  information = null;
- 
+
+  information: Observable<any>;
+  results;
+
   /**
    * Constructor of our details page
    * @param activatedRoute Information about the route we are on
    * @param eventService The event Service to get data
    */
   constructor(private activatedRoute: ActivatedRoute, private eventService: EventService, public loadingController: LoadingController, private toastController: ToastController, private storageService: StorageService, private navController: NavController) { }
- 
+
   ngOnInit() {
     this.getDetails();
   }
@@ -34,14 +36,12 @@ export class EventDetailsPage implements OnInit {
 
     // Get the ID that was passed with the URL
     let id = this.activatedRoute.snapshot.paramMap.get('id');
- 
+
     // Get the information from the API and hide loading spinner
-    this.eventService.getDetails(id).subscribe(result => {
-      this.information = result;
-      // Update saved state
-      this.loadItems(true);
-      loading.dismiss();
-    }, error => { loading.dismiss(); });
+    this.information = this.eventService.getDetails(id);
+    this.information.subscribe(results => this.results = results);
+    console.log(this.results);
+    loading.dismiss();
   }
 
   openWebsite() {
@@ -58,7 +58,7 @@ export class EventDetailsPage implements OnInit {
 
   // Starring feature functions
 
-  items: Item[] = []; 
+  items: Item[] = [];
   newItem: Item = <Item>{};
   thisItem: Item = <Item>{};
   is_starred: boolean;
@@ -91,7 +91,7 @@ export class EventDetailsPage implements OnInit {
     this.newItem.event_start = this.information.event_start;
     this.newItem.event_type = this.information.event_type;
     this.newItem.event_photo_url = this.information.event_photo_url
- 
+
     this.storageService.addItem(this.newItem).then(item => {
       this.newItem = <Item>{};
       this.showToast('Event saved! Find it in the Starred tab.')
@@ -100,7 +100,7 @@ export class EventDetailsPage implements OnInit {
   }
 
   // READ
-  loadItems(update=false) {
+  loadItems(update = false) {
     this.storageService.getItems().then(items => {
       this.items = items;
       this.thisItem = this.checkStarred();
@@ -110,8 +110,8 @@ export class EventDetailsPage implements OnInit {
       };
     });
   }
-  
-// UPDATE
+
+  // UPDATE
   updateItem(item: Item) {
     item.modified = Date.now();
     item.event_name = this.information.event_name;
@@ -119,8 +119,8 @@ export class EventDetailsPage implements OnInit {
     item.event_start = this.information.event_start;
     item.event_type = this.information.event_type
 
-    this.storageService.updateItem(item).then(item => {});
-}
+    this.storageService.updateItem(item).then(item => { });
+  }
 
   // DELETE
   deleteItem(item: Item) {
@@ -129,10 +129,10 @@ export class EventDetailsPage implements OnInit {
       this.loadItems();
     });
   }
-  
+
   // READ: check if this event is already starred
   checkStarred() {
-    for (var i=0; i < this.items.length; i++) {
+    for (var i = 0; i < this.items.length; i++) {
       if (this.items[i].id === this.information.event_id) {
         this.is_starred = true;
         return this.items[i];
