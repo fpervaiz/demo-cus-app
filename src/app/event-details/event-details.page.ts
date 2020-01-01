@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController, ToastController, NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-event-details',
@@ -14,6 +15,7 @@ import { Observable } from 'rxjs';
 export class EventDetailsPage implements OnInit {
 
   information: Observable<any>;
+  error: string;
   results;
 
   /**
@@ -28,9 +30,16 @@ export class EventDetailsPage implements OnInit {
     private storageService: StorageService,
     private navController: NavController,
     private fcmService: FcmService) { }
- 
+
   ngOnInit() {
     this.getDetails();
+  }
+
+  // Update saved status every time page viewed
+  ionViewDidEnter() {
+    if (this.results) {
+      this.loadItems();
+    }
   }
 
   async getDetails() {
@@ -45,9 +54,25 @@ export class EventDetailsPage implements OnInit {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 
     // Get the information from the API and hide loading spinner
-    this.information = this.eventService.getDetails(id);
-    this.information.subscribe(results => this.results = results);
-    loading.dismiss();
+
+    this.eventService.getDetails(id).pipe(
+      finalize(async () => {
+        // Hide the loading spinner on success or error
+        await loading.dismiss();
+        this.loadItems();
+      })
+    )
+      .subscribe(
+        data => {
+          // Set the data to display in the template
+          this.information = data;
+          this.results = data;
+        },
+        err => {
+          // Set the error information to display in the template
+          this.error = `An error occurred, the data could not be retrieved: Status: ${err.status}, Message: ${err.statusText}`;
+        }
+      );
   }
 
   openWebsite(url: string) {
@@ -149,8 +174,4 @@ export class EventDetailsPage implements OnInit {
     this.is_starred = false;
   };
 
-  // Update saved status every time page viewed
-  ionViewDidEnter() {
-    this.loadItems();
-  }
 }

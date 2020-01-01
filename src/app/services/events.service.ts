@@ -41,8 +41,7 @@ export class EventService {
   */
   searchData(time: string, type: SearchType): Observable<any> {
     return this.http.get(`${this.url}/${time}/${type}`, this.httpOptions).pipe(
-      map(results => results)
-    );
+      map(results => results));
   }
 
   /**

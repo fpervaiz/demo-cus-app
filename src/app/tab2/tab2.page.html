@@ -63,7 +63,7 @@
 -->
 
   <ion-list>
-    <ion-card padding button *ngFor="let item of (results | async)"
+    <ion-card padding button *ngFor="let item of results"
       [routerLink]="['/', 'tabs', 'tab2', 'event-details', item.event_id]">
 
       <ion-row>
@@ -95,5 +95,14 @@
 
     </ion-card>
   </ion-list>
+
+  <ion-text text-center color="medium" *ngIf="results?.length < 1">
+    <h3>No events found</h3>
+  </ion-text>
+
+  <p *ngIf="!error;else errorContent"></p>
+  <ng-template #errorContent>
+    <p><span style="color: red;">{{error}}</span></p>
+  </ng-template>
 
 </ion-content>

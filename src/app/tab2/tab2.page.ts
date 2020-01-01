@@ -1,6 +1,7 @@
 import { EventService, SearchType } from './../services/events.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs'
+import { finalize } from 'rxjs/operators';
 import { LoadingController } from '@ionic/angular';
 
 // import { Component } from '@angular/core';
@@ -13,6 +14,7 @@ import { LoadingController } from '@ionic/angular';
 export class Tab2Page implements OnInit {
   
   results: Observable<any>;
+  error: string;
   termResult: Observable<any>;
   time: string = 'upcoming';
   type: SearchType = SearchType.all;
@@ -38,7 +40,21 @@ export class Tab2Page implements OnInit {
     await loading.present();
 
     // Call event service function which returns an Observable
-    this.results = this.eventService.searchData(this.time, this.type);
-    loading.dismiss();
+    this.eventService.searchData(this.time, this.type).pipe(
+      finalize(async () => {
+        // Hide the loading spinner on success or error
+        await loading.dismiss();
+      })
+  )
+  .subscribe(
+      data => {
+        // Set the data to display in the template
+        this.results = data;
+      },
+      err => {
+        // Set the error information to display in the template
+        this.error = `An error occurred, the data could not be retrieved: Status: ${err.status}, Message: ${err.statusText}`;
+      }
+  );
   }
 }

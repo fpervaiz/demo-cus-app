@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="information | async as information">{{ information.event_term }}</ion-title>
+    <ion-title *ngIf="information">{{ information.event_term }}</ion-title>
     <ion-button fill="clear" slot="end" (click)="toggleItem()">
       <ion-icon [color]="is_starred ? 'energized' : 'medium'" name="star"></ion-icon>
     </ion-button>
   </ion-toolbar>
 
-  <ion-list-header no-padding *ngIf="information | async as information">
+  <ion-list-header no-padding *ngIf="information">
     <ion-item lines="none" style="--ion-background-color:#880313; width: 100%">
       <ion-avatar *ngIf="information.event_type != 'debate'" padding slot="start" style="width:100px;height:100px">
         <img src="{{ information.event_photo_url }}">
@@ -27,7 +27,7 @@
   </ion-list-header>
 </ion-header>
 
-<ion-content *ngIf="information | async as information">
+<ion-content *ngIf="information">
 
   <ion-button expand="full" *ngIf="information.event_action_text" (click)="openAction(information.event_action_url)">
     <ion-icon name="open" slot="start"></ion-icon>

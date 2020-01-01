@@ -32,10 +32,10 @@ export class Tab1Page implements OnInit {
     this.news = this.newsService.getInfo(this.newsType);
   }
 
-  ionViewDidEnter() {
-    this.nextResult = this.nextEventService.nextEvent();
-    this.news = this.newsService.getInfo(this.newsType);
-  }
+  //ionViewDidEnter() {
+  //  this.nextResult = this.nextEventService.nextEvent();
+  //  this.news = this.newsService.getInfo(this.newsType);
+  //}
 
   async openModal(id, date, title, content, thumb) {
     const modal = await this.modalController.create({
