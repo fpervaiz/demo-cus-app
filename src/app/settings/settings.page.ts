@@ -23,13 +23,13 @@ export class SettingsPage implements OnInit {
 
   async getSettings() {
     this.global_notifs = await this.storage.get('global_notifs');
-    this.level_notifs = await this.storage.get('level_notifs');
+    //this.level_notifs = await this.storage.get('level_notifs');
     this.toggleDisable();
   }
 
   settingsChanged() {
     this.storage.set('global_notifs', this.global_notifs);
-    this.storage.set('level_notifs', this.level_notifs);
+    //this.storage.set('level_notifs', this.level_notifs);
     this.toggleDisable();
     this.updateFcm();
   }
@@ -43,7 +43,7 @@ export class SettingsPage implements OnInit {
     }
   }
 
-  updateFcm() {
+  /*updateFcm() {
     if (this.globalDisabled) {
       // Disable all notifications
       this.fcmservice.topicUnsubscribe('all');
@@ -55,6 +55,15 @@ export class SettingsPage implements OnInit {
       else {
         this.fcmservice.topicUnsubscribe('all');
       }
+    }
+  }*/
+
+  updateFcm() {
+    if (this.globalDisabled) {
+      this.fcmservice.topicUnsubscribe('all');
+    }
+    else {
+      this.fcmservice.topicSubscribe('all');
     }
   }
 
