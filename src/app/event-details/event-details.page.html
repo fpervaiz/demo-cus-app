@@ -61,7 +61,8 @@
     <ng-container *ngFor="let speaker of information.event_speakers">
       <ion-item *ngIf="speaker.speaker_type == 'prop'" lines="none">
         <ion-avatar padding slot="start" style="width:75px;height:75px">
-          <img src="{{ speaker.speaker_thumb_url }}">
+          <img *ngIf="speaker.speaker_thumb_url" src="{{ speaker.speaker_thumb_url }}">
+          <img *ngIf="!speaker.speaker_thumb_url" src="./assets/avatar_speaker_placeholder.png">
         </ion-avatar>
         <ion-label text-wrap>
           <h2>{{ speaker.speaker_name }}</h2>
@@ -78,7 +79,8 @@
     <ng-container *ngFor="let speaker of information.event_speakers">
       <ion-item *ngIf="speaker.speaker_type == 'opp'" lines="none">
         <ion-avatar padding slot="start" style="width:75px;height:75px">
-          <img src="{{ speaker.speaker_thumb_url }}">
+          <img *ngIf="speaker.speaker_thumb_url" src="{{ speaker.speaker_thumb_url }}">
+          <img *ngIf="!speaker.speaker_thumb_url" src="./assets/avatar_speaker_placeholder.png">
         </ion-avatar>
         <ion-label text-wrap>
           <h2>{{ speaker.speaker_name }}</h2>
