@@ -9,7 +9,7 @@ import { LoadingController, ToastController, NavController } from '@ionic/angula
 })
 export class Tab3Page implements OnInit {
 
-  constructor(private storageService: StorageService, private toastController: ToastController, private navController: NavController) {}
+  constructor(private storageService: StorageService, private toastController: ToastController, private navController: NavController, private loadingController: LoadingController) {}
 
   ngOnInit() {
     this.loadItems();
@@ -29,9 +29,17 @@ export class Tab3Page implements OnInit {
   //@ViewChild('savedList', {static: false})savedList: IonList;
 
   // READ
-  loadItems() {
+  async loadItems() {
+    // Show loading spinner
+    const loading = await this.loadingController.create({
+      message: 'Please Wait',
+      translucent: true,
+    });
+    await loading.present();
+    
     this.storageService.getItems().then(items => {
       this.items = items;
+      loading.dismiss();
     });
   }
 
