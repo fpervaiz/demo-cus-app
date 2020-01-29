@@ -21,7 +21,7 @@ export class DiscountsPage implements OnInit {
   async getDiscounts() {
     // Show loading spinner
     const loading = await this.loadingController.create({
-      message: 'Please Wait',
+      message: 'Please wait',
       translucent: true,
     });
     await loading.present();

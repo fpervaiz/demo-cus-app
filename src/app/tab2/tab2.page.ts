@@ -34,7 +34,7 @@ export class Tab2Page implements OnInit {
   async termcardViewChanged() {
     // Show loading spinner
     const loading = await this.loadingController.create({
-      message: 'Please Wait',
+      message: 'Please wait',
       translucent: true,
     });
     await loading.present();

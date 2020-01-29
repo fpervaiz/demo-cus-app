@@ -32,7 +32,7 @@ export class Tab3Page implements OnInit {
   async loadItems() {
     // Show loading spinner
     const loading = await this.loadingController.create({
-      message: 'Please Wait',
+      message: 'Please wait',
       translucent: true,
     });
     await loading.present();
