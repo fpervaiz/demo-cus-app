@@ -12,7 +12,8 @@
   <ion-list-header no-padding *ngIf="information">
     <ion-item lines="none" color="primary" style="width: 100%">
       <ion-avatar *ngIf="information.event_type != 'debate'" padding slot="start" style="width:100px;height:100px">
-        <img src="{{ information.event_photo_url }}">
+        <img *ngIf="information.event_photo_url" src="{{ information.event_photo_url }}">
+        <img *ngIf="!information.event_photo_url" src="./assets/avatar_event_placeholder.png">
       </ion-avatar>
       <ion-label text-wrap color="light">
         <h4 *ngIf="information.event_type == 'debate'">{{ information.event_subtitle }}</h4>
@@ -21,7 +22,7 @@
         <br>
         <h3>{{ information.event_date }} | {{ information.event_start }} - {{ information.event_end }}</h3>
         <br *ngIf="information.event_open_to_all == 'true'">
-        <ion-button *ngIf="information.event_open_to_all == 'true'">Open to All - Union+</ion-button>
+        <ion-button color="secondary" *ngIf="information.event_open_to_all == 'true'">Open to All - Union+</ion-button>
       </ion-label>
     </ion-item>
   </ion-list-header>

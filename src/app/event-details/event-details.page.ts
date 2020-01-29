@@ -127,7 +127,7 @@ export class EventDetailsPage implements OnInit {
 
     this.storageService.addItem(this.newItem).then(item => {
       this.newItem = <Item>{};
-      this.showToast('Event saved! Find it in the Starred tab.')
+      this.showToast('Event saved! Find it in the Saved tab.')
       this.loadItems();
     });
   }
