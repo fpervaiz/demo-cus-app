@@ -16,7 +16,7 @@
     </ion-segment>
   </ion-toolbar>
 
-  <ion-item *ngIf="termResult | async as result" lines="none" style="--ion-background-color:#880313">
+  <ion-item *ngIf="termResult | async as result" lines="none" color="primary">
     <ion-label text-wrap color="light">
       <h2 *ngIf="result.is_term">{{ result.curr }}</h2>
       <h2 *ngIf="!result.is_term && this.time == 'upcoming'">{{ result.next }}</h2>

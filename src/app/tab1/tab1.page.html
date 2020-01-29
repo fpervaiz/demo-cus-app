@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-item lines="none" style="--ion-background-color:#414141; text-align: center">
+  <ion-item lines="none" color="secondary" style="text-align: center">
     <ion-label text-wrap color="light">
       <h3>DEFENDING FREE DEBATE SINCE 1815</h3>
     </ion-label>
@@ -55,7 +55,7 @@
       <ion-icon name="arrow-forward" slot="end"></ion-icon>
     </ion-item>
     <ion-card-header no-padding>
-      <ion-item lines="none" style="--ion-background-color:#880313">
+      <ion-item lines="none" color="primary">
         <ion-avatar *ngIf="item.event_type != 'debate'" padding slot="start" style="width:100px;height:100px">
           <img src="{{ item.event_photo_url }}">
         </ion-avatar>
