@@ -10,14 +10,15 @@
 <ion-content>
   <ion-list>
     <ion-list-header padding>
-      <ion-label>
-          As a member of the Union, you can take advantage of the following discounts:
-      </ion-label>
+      <ion-text>
+        As a member of the Union, you can take advantage of the following discounts.<br>
+        <strong>Valid upon production of your Union membership card unless a voucher code is required.</strong>
+      </ion-text>
     </ion-list-header>
 
     <ion-item *ngFor="let discount of discounts">
       <ion-thumbnail slot="start">
-          <img src="{{ discount.image }}">
+        <img src="{{ discount.image }}">
       </ion-thumbnail>
       <ion-label text-wrap>
         <h3>{{ discount.title }}</h3>
