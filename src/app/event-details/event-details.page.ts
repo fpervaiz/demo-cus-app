@@ -84,7 +84,7 @@ export class EventDetailsPage implements OnInit {
   }
 
   openLive() {
-    window.open('http://livestre.am/5s6wW');
+    window.open('https://cus.org/livestream');
   }
 
   // Starring feature functions
