@@ -6,7 +6,7 @@
   </ion-toolbar>
 
   <ion-toolbar>
-    <ion-segment [(ngModel)]="time" (ionChange)="termcardViewChanged($event)" value="upcoming">
+    <ion-segment [(ngModel)]="time" (ionChange)="termcardViewChanged()" value="upcoming">
       <ion-segment-button value="upcoming">
         <ion-label>Upcoming</ion-label>
       </ion-segment-button>
@@ -23,7 +23,7 @@
       <h2 *ngIf="!result.is_term && this.time == 'finished'">{{ result.prev }}</h2>
     </ion-label>
 
-    <ion-select style="color: white" [(ngModel)]="type" (ionChange)="termcardViewChanged($event)">
+    <ion-select style="color: white" [(ngModel)]="type" (ionChange)="termcardViewChanged()">
       <ion-select-option selected value="all">All</ion-select-option>
       <ion-select-option value="debate">Debates</ion-select-option>
       <ion-select-option value="speaker">Speakers</ion-select-option>
@@ -97,9 +97,11 @@
     </ion-card>
   </ion-list>
 
-  <ion-text text-center color="medium" *ngIf="results?.length < 1">
-    <h3>No events found</h3>
-  </ion-text>
+  <ng-container *ngIf="results | async as result">
+    <ion-text text-center color="medium" *ngIf="result?.length < 1">
+      <h3>No events found</h3>
+    </ion-text>
+  </ng-container>
 
   <p *ngIf="!error;else errorContent"></p>
   <ng-template #errorContent>

@@ -9,10 +9,7 @@ import { Storage } from '@ionic/storage';
 })
 export class SettingsPage implements OnInit {
 
-  global_notifs: boolean
   level_notifs: string
-
-  globalDisabled: string
 
   constructor(private storage: Storage,
     private fcmservice: FcmService) { }

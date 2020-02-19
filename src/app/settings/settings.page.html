@@ -12,7 +12,7 @@
     <ion-list-header>Notifications</ion-list-header>
     <ion-item>
       <ion-label>Get notifications for:</ion-label>
-      <ion-select [(ngModel)]="level_notifs" (ionChange)="settingsChanged($event)">
+      <ion-select [(ngModel)]="level_notifs" (ionChange)="settingsChanged()">
         <ion-select-option value="starred">Saved events only</ion-select-option>
         <ion-select-option value="all">All events</ion-select-option>
       </ion-select>
