@@ -19,51 +19,27 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.getSettings();
-  }
-
-  async getSettings() {
-    this.global_notifs = await this.storage.get('global_notifs');
-    //this.level_notifs = await this.storage.get('level_notifs');
-    this.toggleDisable();
-  }
-
-  settingsChanged() {
-    this.storage.set('global_notifs', this.global_notifs);
-    //this.storage.set('level_notifs', this.level_notifs);
-    this.toggleDisable();
     this.updateFcm();
   }
 
-  toggleDisable() {
-    if (!this.global_notifs) {
-      this.globalDisabled = 'true';
-    }
-    else {
-      this.globalDisabled = 'false';
+  async getSettings() {
+    this.level_notifs = await this.storage.get('level_notifs');
+    if (!this.level_notifs) {
+      this.level_notifs = 'starred';
     }
   }
 
-  /*updateFcm() {
-    if (this.globalDisabled) {
-      // Disable all notifications
-      this.fcmservice.topicUnsubscribe('all');
-    }
-    else {
-      if (this.level_notifs == 'all') {
-        this.fcmservice.topicSubscribe('all');
-      }
-      else {
-        this.fcmservice.topicUnsubscribe('all');
-      }
-    }
-  }*/
+  settingsChanged() {
+    this.storage.set('level_notifs', this.level_notifs);
+    this.updateFcm();
+  }
 
   updateFcm() {
-    if (this.globalDisabled) {
-      this.fcmservice.topicUnsubscribe('all');
+    if (this.level_notifs === 'all') {
+      this.fcmservice.topicSubscribe('all');
     }
     else {
-      this.fcmservice.topicSubscribe('all');
+      this.fcmservice.topicUnsubscribe('all');
     }
   }
 

@@ -9,16 +9,13 @@
 
 <ion-content>
   <ion-list>
+    <ion-list-header>Notifications</ion-list-header>
     <ion-item>
-      <ion-label>Notifications</ion-label>
-      <ion-toggle [(ngModel)]="global_notifs" (ionChange)="settingsChanged($event)"></ion-toggle>
-    </ion-item>
-    <!--<ion-item>
       <ion-label>Get notifications for:</ion-label>
-      <ion-select disabled="{{ globalDisabled }}" [(ngModel)]="level_notifs" (ionChange)="settingsChanged($event)" value="starred">
-        <ion-select-option value="starred">Starred events only</ion-select-option>
+      <ion-select [(ngModel)]="level_notifs" (ionChange)="settingsChanged($event)">
+        <ion-select-option value="starred">Saved events only</ion-select-option>
         <ion-select-option value="all">All events</ion-select-option>
       </ion-select>
-    </ion-item>-->
+    </ion-item>
   </ion-list>
 </ion-content>
