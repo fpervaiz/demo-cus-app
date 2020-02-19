@@ -87,6 +87,10 @@ export class EventDetailsPage implements OnInit {
     window.open('https://cus.org/livestream');
   }
 
+  openQuestionSubmit(id: string, name: string) {
+    window.open(`mailto:vicepresident@cus.org?subject=Question Submission: ` + name + ` (` + id + `)&body=Question Submission%0D%0A%0D%0AName: %0D%0A%0D%0AEvent: ` + name + `%0D%0A%0D%0AQuestion(s): %0D%0A%0D%0A%0D%0A`);
+  }
+
   // Starring feature functions
 
   items: Item[] = [];

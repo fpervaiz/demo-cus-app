@@ -35,6 +35,11 @@
     {{ information.event_action_text }}
   </ion-button>
 
+  <ion-button expand="full" *ngIf="!information.event_action_text && information.event_status == 'upcoming' && information.event_type != 'other'" (click)="openQuestionSubmit(information.event_id, information.event_name)">
+    <ion-icon name="open" slot="start"></ion-icon>
+    Submit a question
+  </ion-button>
+
   <ion-button expand="full" *ngIf="information.event_status == 'live'" (click)="openLive()">
     <ion-icon name="open" slot="start"></ion-icon>
     Watch livestream
